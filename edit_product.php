@@ -45,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reorder_level = $_POST["reorder_level"];
     $status = $_POST["status"];
 
+    $old_stock = $product["current_stock"];
 
     // Update product
     $update_sql = "UPDATE products
@@ -70,18 +71,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $product_id
     );
 
+if ($update_stmt->execute()) {
 
-    if ($update_stmt->execute()) {
+    // Check if the stock actually changed
+    if ($current_stock != $old_stock) {
 
-        header("Location: products.php");
+        // Determine transaction type
+        if ($current_stock > $old_stock) {
+            $transaction_type = "IN";
+            $quantity = $current_stock - $old_stock;
+        } else {
+            $transaction_type = "OUT";
+            $quantity = $old_stock - $current_stock;
+        }
 
-        exit();
+        // Record the inventory transaction
+        $transaction_sql = "INSERT INTO inventory_transactions
+                            (product_id, transaction_type, quantity,
+                             transaction_date, stock_before, stock_after, remarks)
+                            VALUES (?, ?, ?, NOW(), ?, ?, ?)";
 
-    } else {
+        $transaction_stmt = $conn->prepare($transaction_sql);
 
-        echo "Error updating product: " . $update_stmt->error;
+        $remarks = "Stock changed through product edit.";
+
+        $transaction_stmt->bind_param(
+            "isiiss",
+            $product_id,
+            $transaction_type,
+            $quantity,
+            $old_stock,
+            $current_stock,
+            $remarks
+        );
+
+        if (!$transaction_stmt->execute()) {
+
+            echo "Product updated, but inventory transaction failed: "
+                 . $transaction_stmt->error;
+
+            exit();
+
+        }
 
     }
+
+    header("Location: products.php");
+
+    exit();
+
+} else {
+
+    echo "Error updating product: " . $update_stmt->error;
+
+}
 
 }
 
