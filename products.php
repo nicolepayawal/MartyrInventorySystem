@@ -111,7 +111,18 @@ if (!$result) {
 
                     echo "<td>" . $row["expiration_date"] . "</td>";
 
-                    echo "<td>" . $row["current_stock"] . "</td>";
+                    $stock = $row["current_stock"];
+                    $reorder = $row["reorder_level"];
+
+                    if ($stock == 0) {
+                        $stock_display = "❌ Out of Stock";
+                    } elseif ($stock <= $reorder) {
+                        $stock_display = "⚠️ Low Stock (" . $stock . ")";
+                    } else {
+                        $stock_display = "✅ " . $stock;
+                    }
+
+                    echo "<td>" . $stock_display . "</td>";
 
                     echo "<td>" . $row["reorder_level"] . "</td>";
 
