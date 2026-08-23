@@ -34,7 +34,7 @@ CREATE TABLE `inventory_transactions` (
   PRIMARY KEY (`inventory_transaction_id`),
   KEY `product_id` (`product_id`),
   CONSTRAINT `inventory_transactions_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +43,7 @@ CREATE TABLE `inventory_transactions` (
 
 LOCK TABLES `inventory_transactions` WRITE;
 /*!40000 ALTER TABLE `inventory_transactions` DISABLE KEYS */;
+INSERT INTO `inventory_transactions` VALUES (1,1,'IN',5,'2026-08-24 00:36:30',20,25,'Stock changed through product edit.'),(2,1,'OUT',3,'2026-08-24 00:38:36',25,22,'Stock changed through product edit.');
 /*!40000 ALTER TABLE `inventory_transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +72,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Fortuna\'s Bloom',299.00,'2027-12-31',20,5,'Active'),(2,'Sweet Side',299.00,'2027-12-31',15,5,'Active'),(3,'Sweet Blossom',299.00,'2027-12-31',17,4,'Active'),(7,'White Roses',299.00,'2027-12-31',12,5,'Active'),(8,'Black Roses',300.00,'2027-12-31',10,5,'Active'),(9,'Project Pink',300.00,'2027-12-31',16,5,'Active'),(10,'El Patron',300.00,'2027-12-31',14,5,'Active'),(11,'Gentleman',300.00,'2027-12-31',11,5,'Active'),(12,'Escobar',299.00,'2027-12-31',13,5,'Active'),(13,'Midnight Blaze',300.00,'2027-12-31',17,5,'Active'),(14,'Equinox',300.00,'2027-12-31',9,5,'Active'),(15,'Unreleased: 1',400.00,'2028-01-31',5,3,'Active'),(16,'Unreleased: 2',400.00,'2028-01-31',5,3,'Active'),(18,'Sea Breeze',299.00,'2026-12-31',4,5,'Inactive');
+INSERT INTO `products` VALUES (1,'Fortuna\'s Bloom',299.00,'2027-12-31',22,5,'Active'),(2,'Sweet Side',299.00,'2027-12-31',15,5,'Active'),(3,'Sweet Blossom',299.00,'2027-12-31',17,4,'Active'),(7,'White Roses',299.00,'2027-12-31',12,5,'Active'),(8,'Black Roses',300.00,'2027-12-31',10,5,'Active'),(9,'Project Pink',300.00,'2027-12-31',16,5,'Active'),(10,'El Patron',300.00,'2027-12-31',14,5,'Active'),(11,'Gentleman',300.00,'2027-12-31',11,5,'Active'),(12,'Escobar',299.00,'2027-12-31',13,5,'Active'),(13,'Midnight Blaze',300.00,'2027-12-31',17,5,'Active'),(14,'Equinox',300.00,'2027-12-31',9,5,'Active'),(15,'Unreleased: 1',400.00,'2028-01-31',5,3,'Active'),(16,'Unreleased: 2',400.00,'2028-01-31',0,3,'Active'),(18,'Sea Breeze',299.00,'2026-12-31',4,5,'Inactive');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,4 +140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-08-23 20:04:54
+-- Dump completed on 2026-08-24  1:14:45
