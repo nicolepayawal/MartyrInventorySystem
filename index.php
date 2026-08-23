@@ -58,19 +58,20 @@ $low_stock = $low_stock_data["low_stock"];
     </header>
 
 
-    <nav>
+<nav>
 
-        <a href="index.php">Dashboard</a>
+    <a href="index.php">Dashboard</a>
 
-        <a href="products.php">Products</a>
+    <a href="products.php">Products</a>
 
-        <a href="#">Sales</a>
+    <a href="add_product.php">Add Product</a>
 
-        <a href="#">Inventory</a>
+    <a href="stock_adjustment.php">Stock Adjustment</a>
 
-        <a href="#">Reports</a>
+    <a href="inventory_history.php">Inventory History</a>
 
-    </nav>
+</nav>
+
 
 
     <main>
